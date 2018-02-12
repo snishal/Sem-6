@@ -5,11 +5,7 @@ using namespace std;
 
 struct Point{
 	int x,y;
-	Point(int x, int y){
-		this->x = x;
-		this->y = y;
-	}
-};
+}p1,p2,p3;
 
 void plot(int x, int y)
 {
@@ -29,26 +25,30 @@ void myInit (void)
 	gluOrtho2D(0.0, 640.0, 0.0, 480.0);
 }
 
-
 void ddaAlgo(Point p1, Point p2)
 {
 
-	int xi = p1.x, yi = p1.y;
-	
-	int m = (p2.y-y1)/(p2.x-x1);
+	int dx = p2.x - p1.x;
+    int dy = p2.y - p1.y;
 
-	while(xi != p2.x){
+    int steps = abs(dx) > abs(dy) ? abs(dx) : abs(dy);
 
-		plot(xi, yi);
-		
-		xi = xi + 1;
-		yi = yi + m;	
+    float Xinc = dx / (float) steps;
+    float Yinc = dy / (float) steps;
 
-	}
+    float X = p1.x;
+    float Y = p1.y;
+    for (int i = 0; i <= steps; i++)
+    {
+        plot(X,Y);
+        X += Xinc;
+        Y += Yinc;
+    }
+
 
 }
 
-void myDisplay(Point p1, Point p2, Point p3)
+void myDisplay()
 {
 	glClear (GL_COLOR_BUFFER_BIT);
 	glColor3f (0.0, 0.0, 0.0);
@@ -62,33 +62,35 @@ void myDisplay(Point p1, Point p2, Point p3)
 }
 
 int main(int argc, char** argv)
-{	
+{
 	int x, y;
 	cout << "Enter the coordinates of the Triangle:\n\n" << endl;
 
 	cout << "X1-coordinate   : "; cin >> x;
 	cout << "\nY1-coordinate : "; cin >> y;
-	
-	Point p1(x,y);
+
+	p1.x = x;
+	p1.y = y;
 
 	cout << "\nX2-coordinate   : "; cin >> x;
 	cout << "\nY2-coordinate : "; cin >> y;
 
-	Point p2(x,y);
+	p2.x = x;
+	p2.y = y;
 
 	cout << "\nX3-coordinate   : "; cin >> x;
 	cout << "\nY3-coordinate : "; cin >> y;
 
-	Point p3(x,y);
+	p3.x = x;
+	p3.y = y;
 
 	glutInit(&argc, argv);
 	glutInitDisplayMode (GLUT_SINGLE | GLUT_RGB);
 	glutInitWindowSize (640, 480);
 	glutInitWindowPosition (100, 150);
-	glutCreateWindow ("DDA Alogrithm");
+	glutCreateWindow ("Triangle Alogrithm");
 	glutDisplayFunc(myDisplay);
 	myInit ();
 	glutMainLoop();
 	return 0;
 }
-

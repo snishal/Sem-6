@@ -27,9 +27,9 @@ void myInit (void)
 void bresenHamAlgo()
 {
 
-	int dy = y2-y1, dx = x2-x1;	
+	int dy = y2-y1, dx = x2-x1;
 	int xi = x1, yi = y1;
-	
+
 	int d = 2*dy - dx;
 
 	while(xi <= x2){
@@ -38,13 +38,13 @@ void bresenHamAlgo()
 
 		if(d > 0){
 			yi = yi + 1;
-			d = d + 2*(dy-dx);			
+			d = d + 2*(dy-dx);
 		}else{
 			d = d + 2*dy;
 		}
 
 		xi = xi + 1;
-	
+
 	}
 
 }
@@ -61,7 +61,7 @@ void myDisplay(void)
 }
 
 int main(int argc, char** argv)
-{	
+{
 	cout << "Enter the coordinates of the Line:\n\n" << endl;
 
 	cout << "X1-coordinate   : "; cin >> x1;
@@ -73,10 +73,9 @@ int main(int argc, char** argv)
 	glutInitDisplayMode (GLUT_SINGLE | GLUT_RGB);
 	glutInitWindowSize (640, 480);
 	glutInitWindowPosition (100, 150);
-	glutCreateWindow ("DDA Alogrithm");
+	glutCreateWindow ("BresenHam Alogrithm");
 	glutDisplayFunc(myDisplay);
 	myInit ();
 	glutMainLoop();
 	return 0;
 }
-
