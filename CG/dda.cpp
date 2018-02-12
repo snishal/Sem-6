@@ -30,13 +30,32 @@ void ddaAlgo()
 	int xi = x1, yi = y1;
 	
 	int m = (y2-y1)/(x2-x1);
+	
+	if(m <= 1 && -1 <= m){
 
-	while(xi != x2){
+		if(xi > x2){
+			
+		}
+		while(xi != x2){
 
-		plot(xi, yi);
-		
-		xi = xi + 1;
-		yi = yi + m;	
+			plot(xi, yi);
+			
+			xi = xi + 1;
+			yi = yi + m;	
+
+		}
+
+	}else{
+	
+		while(yi != y2){
+
+			plot(xi, yi);
+			
+			yi = yi + 1;				
+			xi = xi + m*(xi + 1)/m;
+			
+
+		}
 
 	}
 
