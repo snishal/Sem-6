@@ -27,8 +27,24 @@ void myInit (void)
 void ddaAlgo()
 {
 
-	int xi = x1, yi = y1;
+	int dx = x2 - x1;
+    int dy = y2 - y1;
+ 
+    int steps = abs(dx) > abs(dy) ? abs(dx) : abs(dy);
+ 
+    float Xinc = dx / (float) steps;
+    float Yinc = dy / (float) steps;
+ 
+    float X = x1;
+    float Y = y1;
+    for (int i = 0; i <= steps; i++)
+    {
+        plot(X,Y);
+        X += Xinc;
+        Y += Yinc;
+    }
 	
+<<<<<<< HEAD
 	int m = (y2-y1)/(x2-x1);
 	
 	if(m <= 1 && -1 <= m){
@@ -58,6 +74,8 @@ void ddaAlgo()
 		}
 
 	}
+=======
+>>>>>>> b47dbef07a9f99ef1baace9610b3f7ec5a4dd79a
 
 }
 
