@@ -25,12 +25,15 @@ void ddaAlgo() {
   int dx = x2 - x1;
   int dy = y2 - y1;
 
+  int xi = x1, yi = y1;
+
   int m = (y2-y1)/(x2-x1);
 
 	if(m <= 1 && -1 <= m){
 
 		if(xi > x2){
-
+            swap(xi, x2);
+            swap(yi, y2);
 		}
 		while(xi != x2){
 
@@ -42,6 +45,11 @@ void ddaAlgo() {
 		}
 
 	}else{
+
+        if(yi > y2){
+            swap(xi, x2);
+            swap(yi, y2);
+		}
 
 		while(yi != y2){
 
