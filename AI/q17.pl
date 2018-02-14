@@ -1,12 +1,11 @@
 memberOf(X, [X|_]) :- !.
 memberOf(X, [_|Y]) :- memberOf(X, Y).
 
-conc([], L2, L2).
-conc([X|L1], L2, [X|L3]) :- conc(L1, L2, L3).
+remove_dup(L, R) :- remove(L, [], R),!.
 
-remove_dup([],[]) :- !.
-remove_dup([H|T], R) :- memberOf(H,T), remove_dup(T,R).
-remove_dup([H|T], [H|T1]) :- \+(memberOf(H,T)),remove_dup(T,T1).
+remove([], R, R).
+remove([H|T], L1, R) :- memberOf(H, L1), remove(T, L1, R).
+remove([H|T], L1, R) :- remove(T, [H|L1], R).
 
 
 

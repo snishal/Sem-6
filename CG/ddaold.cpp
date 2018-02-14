@@ -1,9 +1,10 @@
 #include <GL/glut.h>
 #include <iostream>
 #include <stdio.h>
+#include <math.h>
 using namespace std;
 
-int x1, y1, x2, y2;
+int x1, yr, x2, y2;
 
 void plot(int x, int y) {
   glBegin(GL_POINTS);
@@ -22,46 +23,19 @@ void myInit(void) {
 
 void ddaAlgo() {
 
-  int dx = x2 - x1;
-  int dy = y2 - y1;
+  int xi = x1, yi = yr;
 
-  int xi = x1, yi = y1;
+  double m = (y2-yr)/(x2-x1);
 
-  int m = (y2-y1)/(x2-x1);
-
-	if(m <= 1 && -1 <= m){
-
-		if(xi > x2){
-            swap(xi, x2);
-            swap(yi, y2);
-		}
 		while(xi != x2){
 
 			plot(xi, yi);
 
 			xi = xi + 1;
-			yi = yi + m;
+			yi = floor(yi + m + 0.5);
 
 		}
 
-	}else{
-
-        if(yi > y2){
-            swap(xi, x2);
-            swap(yi, y2);
-		}
-
-		while(yi != y2){
-
-			plot(xi, yi);
-
-			yi = yi + 1;
-			xi = xi + m*(xi + 1)/m;
-
-
-		}
-
-	}
 }
 
 void myDisplay(void) {
@@ -79,8 +53,8 @@ int main(int argc, char **argv) {
 
   cout << "X1-coordinate   : ";
   cin >> x1;
-  cout << "\nY1-coordinate : ";
-  cin >> y1;
+  cout << "\nyr-coordinate : ";
+  cin >> yr;
   cout << "\nX2-coordinate   : ";
   cin >> x2;
   cout << "\nY2-coordinate : ";
