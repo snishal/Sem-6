@@ -21,15 +21,16 @@ void myInit(void) {
   gluOrtho2D(0.0, 640.0, 0.0, 480.0);
 }
 void ddaAlgo() {
-  int dx = x2 - x1;
-  int dy = y2 - y1;
+  
+  double xi = x1, yi = yr;
 
-  int m = (y2 - y1) / (x2 - x1);
+  int dx = x2 - x1;
+  int dy = y2 - yr;
+
+  int m = (y2 - yr) / (x2 - x1);
 
   if (m <= 1 && -1 <= m) {
 
-    if (xi > x2) {
-    }
     while (xi != x2) {
 
       plot(xi, yi);
@@ -40,7 +41,7 @@ void ddaAlgo() {
 
   } else {
 
-    while (yi != y2) {
+    while (yi != yr) {
 
       plot(xi, yi);
 

@@ -7,7 +7,7 @@ int xc, yc, r;
 
 void plot(int x, int y) {
   glBegin(GL_POINTS);
-  glVertex2i(x, y);
+  glVertex2i(x + xc, y + yc);
   glEnd();
 }
 
@@ -20,7 +20,7 @@ void myInit(void) {
   gluOrtho2D(0.0, 640.0, 0.0, 480.0);
 }
 
-void circleAlgo(int x_centre, int y_centre, int r)
+void circleAlgo()
 {
     int x = r, y = 0;
 
@@ -39,17 +39,17 @@ void circleAlgo(int x_centre, int y_centre, int r)
         if (x < y)
             break;
 
-        plot(x + x_centre, y + y_centre);
-        plot(-x + x_centre, y + y_centre);
-        plot(x + x_centre, -y + y_centre);
-        plot(-x + x_centre, -y + y_centre);
+        plot(x, y);
+        plot(-x, y);
+        plot(x, -y);
+        plot(-x, -y);
 
         if (x != y)
         {
-            plot(y + x_centre, x + y_centre);
-            plot(-y + x_centre, x + y_centre);
-            plot(y + x_centre, -x + y_centre);
-            plot(-y + x_centre, -x + y_centre);
+            plot(y, x);
+            plot(-y, x);
+            plot(y, -x);
+            plot(-y, -x);
         }
 
     }
@@ -60,7 +60,7 @@ void myDisplay(void) {
   glColor3f(0.0, 0.0, 0.0);
   glPointSize(1.0);
 
-  circleAlgo(xc, yc, r);
+  circleAlgo();
 
   glFlush();
 }

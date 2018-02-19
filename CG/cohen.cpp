@@ -9,10 +9,10 @@ const int RIGHT = 2;  // 0010
 const int BOTTOM = 4; // 0100
 const int TOP = 8;    // 1000
 
-const int x_max = 10;
-const int y_max = 8;
-const int x_min = 4;
-const int y_min = 4;
+const int x_max = 500;
+const int y_max = 700;
+const int x_min = 100;
+const int y_min = 100;
 
 struct Point {
   int x, y;

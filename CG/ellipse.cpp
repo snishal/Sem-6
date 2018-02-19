@@ -3,11 +3,11 @@
 #include <stdio.h>
 using namespace std;
 
-int x1, y1, x2, y2;
+int xc, yc, a, b;
 
 void plot(int x, int y) {
   glBegin(GL_POINTS);
-  glVertex2i(x, y);
+  glVertex2i(x + xc, y + yc);
   glEnd();
 }
 
@@ -20,23 +20,50 @@ void myInit(void) {
   gluOrtho2D(0.0, 640.0, 0.0, 480.0);
 }
 
-void ddaAlgo() {
+void ellipseAlgo() {	
 
-  int dx = x2 - x1;
-  int dy = y2 - y1;
+	int x = 0, y = b;
+	int aSq = a*a;
+	int bSq = b*b;
+	double d1 = bSq - (aSq*b) + (0.25 * aSq);
 
-  int steps = abs(dx) > abs(dy) ? abs(dx) : abs(dy);
+	cout << a << " : " << b <<endl;
 
-  float Xinc = dx / (float)steps;
-  float Yinc = dy / (float)steps;
+	plot(x, y);
+	plot(-x, y);
+	plot(x, -y);
+	plot(-x, -y);
 
-  float X = x1;
-  float Y = y1;
-  for (int i = 0; i <= steps; i++) {
-    plot(X, Y);
-    X += Xinc;
-    Y += Yinc;
-  }
+	while(aSq*(y - 0.5) > bSq*(x+1)){
+
+		if(d1 < 0)
+			d1 += bSq*(2*x + 3);
+		else{
+			d1 += bSq*(2*x + 3) + aSq*(-2*y + 2);
+			y--;
+		}
+		x++;
+		plot(x, y);
+		plot(-x, y);
+		plot(x, -y);
+		plot(-x, -y);
+	}
+	
+	double d2 = bSq*(x + 0.5)*(x + 0.5) + aSq*(y-1)*(y-1) - aSq*bSq;
+	while(y > 0){
+		if(d2 < 0){
+			d2 += bSq*(2*x+2) + aSq*(-2*y + 3);
+			x++;
+		}else{
+			d2 += aSq*(-2*y + 3);
+		}
+		y--;
+		plot(x, y);
+		plot(-x, y);
+		plot(x, -y);
+		plot(-x, -y);
+	}
+
 }
 
 void myDisplay(void) {
@@ -44,7 +71,7 @@ void myDisplay(void) {
   glColor3f(0.0, 0.0, 0.0);
   glPointSize(1.0);
 
-  ddaAlgo();
+  ellipseAlgo();
 
   glFlush();
 }
@@ -52,14 +79,14 @@ void myDisplay(void) {
 int main(int argc, char **argv) {
   cout << "Enter the coordinates of the Line:\n\n" << endl;
 
-  cout << "X1-coordinate   : ";
-  cin >> x1;
-  cout << "\nY1-coordinate : ";
-  cin >> y1;
-  cout << "\nX2-coordinate   : ";
-  cin >> x2;
-  cout << "\nY2-coordinate : ";
-  cin >> y2;
+  cout << "XCenter-coordinate   : ";
+  cin >> xc;
+  cout << "\nYCenter-coordinate : ";
+  cin >> yc;
+  cout << "\nMajor Axis Length : ";
+  cin >> a;
+  cout << "\nMajor Axis Length : ";
+  cin >> b;
 
   glutInit(&argc, argv);
   glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
