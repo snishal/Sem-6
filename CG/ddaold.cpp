@@ -19,41 +19,34 @@ void myInit(void) {
   glLoadIdentity();
   gluOrtho2D(0.0, 640.0, 0.0, 480.0);
 }
-
 void ddaAlgo() {
-
   int dx = x2 - x1;
   int dy = y2 - y1;
 
-  int m = (y2-y1)/(x2-x1);
+  int m = (y2 - y1) / (x2 - x1);
 
-	if(m <= 1 && -1 <= m){
+  if (m <= 1 && -1 <= m) {
 
-		if(xi > x2){
+    if (xi > x2) {
+    }
+    while (xi != x2) {
 
-		}
-		while(xi != x2){
+      plot(xi, yi);
 
-			plot(xi, yi);
+      xi = xi + 1;
+      yi = yi + m;
+    }
 
-			xi = xi + 1;
-			yi = yi + m;
+  } else {
 
-		}
+    while (yi != y2) {
 
-	}else{
+      plot(xi, yi);
 
-		while(yi != y2){
-
-			plot(xi, yi);
-
-			yi = yi + 1;
-			xi = xi + m*(xi + 1)/m;
-
-
-		}
-
-	}
+      yi = yi + 1;
+      xi = xi + m * (xi + 1) / m;
+    }
+  }
 }
 
 void myDisplay(void) {
