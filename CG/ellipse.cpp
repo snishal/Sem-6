@@ -1,10 +1,9 @@
 #include <GL/glut.h>
 #include <iostream>
 #include <stdio.h>
-#include <math.h>
 using namespace std;
 
-int x1, yr, x2, y2;
+int x1, y1, x2, y2;
 
 void plot(int x, int y) {
   glBegin(GL_POINTS);
@@ -20,33 +19,23 @@ void myInit(void) {
   glLoadIdentity();
   gluOrtho2D(0.0, 640.0, 0.0, 480.0);
 }
+
 void ddaAlgo() {
+
   int dx = x2 - x1;
   int dy = y2 - y1;
 
-  int m = (y2 - y1) / (x2 - x1);
+  int steps = abs(dx) > abs(dy) ? abs(dx) : abs(dy);
 
-  if (m <= 1 && -1 <= m) {
+  float Xinc = dx / (float)steps;
+  float Yinc = dy / (float)steps;
 
-    if (xi > x2) {
-    }
-    while (xi != x2) {
-
-      plot(xi, yi);
-
-      xi = xi + 1;
-      yi = yi + m;
-    }
-
-  } else {
-
-    while (yi != y2) {
-
-      plot(xi, yi);
-
-      yi = yi + 1;
-      xi = xi + m * (xi + 1) / m;
-    }
+  float X = x1;
+  float Y = y1;
+  for (int i = 0; i <= steps; i++) {
+    plot(X, Y);
+    X += Xinc;
+    Y += Yinc;
   }
 }
 
@@ -65,8 +54,8 @@ int main(int argc, char **argv) {
 
   cout << "X1-coordinate   : ";
   cin >> x1;
-  cout << "\nyr-coordinate : ";
-  cin >> yr;
+  cout << "\nY1-coordinate : ";
+  cin >> y1;
   cout << "\nX2-coordinate   : ";
   cin >> x2;
   cout << "\nY2-coordinate : ";
