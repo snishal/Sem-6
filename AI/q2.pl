@@ -1,3 +1,8 @@
+/*
+	Predicate Max(Param1, Param2, Param3)
+				finds Max of Param1 and Param2
+				Result is stored in Param3		  
+*/
 max(A,B,R) :- A=<B, !, B=R.
 max(A,_,A).
 

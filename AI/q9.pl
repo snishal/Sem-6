@@ -1,3 +1,10 @@
+/*
+	edge(X,Y) are the facts that represent a given Graph i.e. edge exists in Graph from X to Y
+	Predicate route(Param1, Param2)
+				Checks if route exists from Param1 to Param2 in stored graph
+
+	Base Case: route(X,Y) :- edge(X,Y),!. if there is a direct edge between X and Y, route exists
+*/
 edge('p','q').
 edge('q','r').
 edge('q','s').
