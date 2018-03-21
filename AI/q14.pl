@@ -17,6 +17,6 @@ go :-
 	write('Enter List : '),
 	read(X),
 	sumList(X,S),
-	write('Sum of List is : '),write(S),!
+	write('Sum of List is : '),write(S),!.
 
 :-initialization(go).	

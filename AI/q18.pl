@@ -18,6 +18,6 @@ go :-
 	write('Enter List : '),
 	read(X),
 	maxList(X,N),	
-	write('MAx of List is : '),write(N),!
+	write('MAx of List is : '),write(N),!.
 
 :-initialization(go).	

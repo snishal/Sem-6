@@ -18,6 +18,6 @@ go :-
 	write('Enter Index to Insert : '),
 	read(I),
 	nElem(X,N,I,Y),	
-	write('Updated List is : '),write(Y),!
+	write('Updated List is : '),write(Y),!.
 
 :-initialization(go).

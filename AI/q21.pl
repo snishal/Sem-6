@@ -16,6 +16,6 @@ go :-
 	write('Enter Index : '),
 	read(I),
 	deleteElem(X,I,R),
-	write('Updated List is : '),write(R),!
+	write('Updated List is : '),write(R),!.
 
 :-initialization(go).	

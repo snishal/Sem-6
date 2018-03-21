@@ -15,6 +15,6 @@ go :-
 	write('Enter Check Sublist : '),
 	read(Y),
 	subList(X,Y),	
-	write('Is SubList'),!
+	write('Is SubList'),!.
 
 :-initialization(go).	

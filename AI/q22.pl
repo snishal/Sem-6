@@ -15,6 +15,6 @@ go :-
 	write('Enter N : '),
 	read(N),
 	delete_all(N,X,Y),	
-	write('Result List is : '),write(Y),!
+	write('Result List is : '),write(Y),!.
 
 :-initialization(go).	

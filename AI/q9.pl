@@ -20,8 +20,8 @@ go :-
 	read(X),
 	write('Enter 2nd Node : '),
 	read(Y),
-	path(X,Y,R),
+	route(X,Y),
 	write('Path Exists');
-	write('Path Not Exists'),!
+	write('Path Not Exists'),!.
 
 :-initialization(go).	

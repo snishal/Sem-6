@@ -7,7 +7,7 @@
 	Base Case: mul(Param1,0,0) : Anything multiplied to 0 is 0
 */
 mul(X,0,0) :- !.
-mul(X,Y,R) :- Y>1, Y1 is Y-1, mul(X,Y1,R1), R is R1+X. 
+mul(X,Y,R) :- Y>=1, Y1 is Y-1, mul(X,Y1,R1), R is R1+X. 
 
 go :- 
 	write('Enter 1st Number : '),

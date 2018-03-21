@@ -16,6 +16,6 @@ go :-
 	write('Enter List2 : '),
 	read(Y),
 	merge(X,Y,R),	
-	write('Result List is : '),write(R),!
+	write('Result List is : '),write(R),!.
 
 :-initialization(go).	

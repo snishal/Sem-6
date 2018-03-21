@@ -13,6 +13,6 @@ go :-
 	read(X),
 	pal(X),
 	write('Is a Pallindrome');
-	write('Not Pallindrome'),!
+	write('Not Pallindrome'),!.
 
 :-initialization(go).	 
