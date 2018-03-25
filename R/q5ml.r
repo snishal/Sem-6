@@ -1,0 +1,6 @@
+e = as.matrix(read.csv(file = "test.csv"))
+dim(e)
+nrow(e)
+ncol(e)
+write.csv(e, file="matrix.csv")
+print(dimnames(e))
