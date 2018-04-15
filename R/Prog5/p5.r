@@ -6,7 +6,6 @@ data(iris) #load dataset
 
 #Holdout
 smp_size <- floor(0.75 * nrow(iris))
-
 train <- iris[1:smp_size, ]
 test <- iris[-(1:smp_size), ]
 
@@ -28,7 +27,6 @@ View(confusionMatrix(prediction, test[,5])$table, 'KNN Holdout')
 smp_size <- floor(0.75 * nrow(iris))
 set.seed(123)
 train_ind <- sample(nrow(iris), size = smp_size)
-
 train <- iris[train_ind, ]
 test <- iris[-train_ind, ]
 
