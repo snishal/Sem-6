@@ -8,7 +8,7 @@
 insertElem(L,E,I,R) :- insert(L,E,1,I,R),!.
 
 insert(L,E,N,N,[E|L]).
-insert([H|T],E,I,N,[H|R1]) :- I<N, I1 is I + 1, insert(T,E,I1,N,R1)
+insert([H|T],E,I,N,[H|R1]) :- I<N, I1 is I + 1, insert(T,E,I1,N,R1).
 
 go :- 
 	write('Enter List : '),
@@ -17,7 +17,7 @@ go :-
 	read(N),
 	write('Enter Index to Insert : '),
 	read(I),
-	nElem(X,N,I,Y),	
+	insertElem(X,N,I,Y),	
 	write('Updated List is : '),write(Y),!.
 
 :-initialization(go).

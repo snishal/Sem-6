@@ -1,8 +1,5 @@
-#include <graphics.h>
 #include <GL/glut.h>
 #include <iostream>
-#include <stdio.h>
-#include <conio.h>
 using namespace std;
 
 const int INSIDE = 0; // 0000
@@ -16,9 +13,11 @@ const int y_max = 700;
 const int x_min = 100;
 const int y_min = 100;
 
+int n;
+
 struct Point {
   int x, y;
-} p1, p2;
+}*p;
 
 void plot(int x, int y) {
   glBegin(GL_POINTS);
@@ -33,6 +32,25 @@ void myInit(void) {
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
   gluOrtho2D(0.0, 640.0, 0.0, 480.0);
+}
+
+void ddaAlgo(Point p1, Point p2) {
+
+  int dx = p2.x - p1.x;
+  int dy = p2.y - p1.y;
+
+  int steps = abs(dx) > abs(dy) ? abs(dx) : abs(dy);
+
+  float Xinc = dx / (float)steps;
+  float Yinc = dy / (float)steps;
+
+  float X = p1.x;
+  float Y = p1.y;
+  for (int i = 0; i <= steps; i++) {
+    plot(X, Y);
+    X += Xinc;
+    Y += Yinc;
+  }
 }
 
 int computeCode(float x, float y) {
@@ -98,13 +116,11 @@ void cohenSutherlandClip(Point p1, Point p2) {
     }
   }
   if (accept) {
-    cout << "Line accepted from " << x1 << ", " << y1 << " to " << x2 << ", "
-         << y2 << endl;
     p1.x = x1;
     p1.y = y1;
     p2.x = x2;
     p2.y = y2;
-    line(p1.x, p1.y, p2.x, p2.y);
+    ddaAlgo(p1, p2);
   } else {
     cout << "Line rejected" << endl;
   }
@@ -121,57 +137,57 @@ void myDisplay() {
   pr1.y = y_min;
   pr2.x = x_max;
   pr2.y = y_min;
-  line(pr1.x, pr1.y, pr2.x, pr2.y);
+  ddaAlgo(pr1, pr2);
 
   pr1.x = x_min;
   pr1.y = y_min;
   pr2.x = x_min;
   pr2.y = y_max;
-  line(pr1.x, pr1.y, pr2.x, pr2.y);
+  ddaAlgo(pr1, pr2);
 
   pr1.x = x_max;
   pr1.y = y_min;
   pr2.x = x_max;
   pr2.y = y_max;
-  line(pr1.x, pr1.y, pr2.x, pr2.y);
+  ddaAlgo(pr1, pr2);
 
   pr1.x = x_min;
   pr1.y = y_max;
   pr2.x = x_max;
   pr2.y = y_max;
   ddaAlgo(pr1, pr2);
-  line(pr1.x, pr1.y, pr2.x, pr2.y);	
 
-  cohenSutherlandClip(p1, p2);
-
+  for(int i = 0; i < n; i++){
+  	cohenSutherlandClip(p[i%n], p[(i+1)%n]);
+  }
   glFlush();
 }
 
 int main(int argc, char **argv) {
   int x, y;
-  cout << "Enter the coordinates of the Triangle:\n\n" << endl;
-
-  cout << "X1-coordinate   : ";
-  cin >> x;
-  cout << "\nY1-coordinate : ";
-  cin >> y;
-
-  p1.x = x;
-  p1.y = y;
-
-  cout << "\nX2-coordinate   : ";
-  cin >> x;
-  cout << "\nY2-coordinate : ";
-  cin >> y;
-
-  p2.x = x;
-  p2.y = y;
+  cout << "Enter the number of edges:";
+  cin >> n;
+  
+  p = new Point[n];
+  
+  for(int i = 0; i<n; i++){
+	  
+	  cout << "Enter Coordinate "<<i+1<<endl;	
+	  cout << "X-coordinate   : ";
+	  cin >> x;
+	  cout << "\nY-coordinate : ";
+	  cin >> y;
+  
+  	  p[i].x = x;
+	  p[i].y = y;
+	  	
+  }
 
   glutInit(&argc, argv);
   glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
   glutInitWindowSize(640, 480);
   glutInitWindowPosition(100, 150);
-  glutCreateWindow("cohenSutherland Alogrithm");
+  glutCreateWindow("Polygon Clipping");
   glutDisplayFunc(myDisplay);
   myInit();
   glutMainLoop();

@@ -20,7 +20,7 @@ go :-
 	write('Enter List : '),
 	read(X),
 	remove_dup(X,R),
-	write('Remove Duplicate List is : '),write(R),!
+	write('Remove Duplicate List is : '),write(R),!.
 
 :-initialization(go).	
 
