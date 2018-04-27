@@ -42,3 +42,6 @@ for(col in names(iris)){
 
 View(iris)
 View(colMeanIris)
+
+iris = normalize(iris, method = "standardize")
+View(iris)

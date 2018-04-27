@@ -35,7 +35,6 @@ violations = violatedEdits(rules, dirty_iris, datamodel = TRUE)
 View(summary(violations))
 plot(violations)
 
-
 stat = boxplot.stats(dirty_iris['Sepal.Length'])
 View(stat$out)
 View(dirty_iris[!is.na(dirty_iris$Sepal.Length) & dirty_iris$Sepal.Length %in% stat$out, ])
