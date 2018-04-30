@@ -2,13 +2,12 @@
 #include <iostream>
 using namespace std;
 
-const int INSIDE = 0; // 0000
-const int LEFT = 1;   // 0001
-const int RIGHT = 2;  // 0010
-const int BOTTOM = 4; // 0100
-const int TOP = 8;    // 1000
-
-int **pts;
+int nPoint;
+struct Point{
+  int x;
+  int y;
+  int h;
+}*pts;
 
 void plot(int x, int y) {
   glBegin(GL_POINTS);
@@ -26,29 +25,69 @@ void myInit(void) {
 }
 
 
-void transform(int *mat1, int mat2[][3], int res[1][3])
+void transform(int mat1[][3], int mat2[][3], int res[][3])
 {
-    int j, k;
-    for (j = 0; j < 3; j++)
-    {
-     	res[0][j] = 0;
+    int i,j, k;
+    for(int i = 0; i < nPoint; i++){
+      for (j = 0; j < 3; j++)
+      {
+        res[i][j] = 0;
         for (k = 0; k < 3; k++)
         {
-        	res[0][j] += mat1[k]*mat2[k][j];
-    	}
+        	res[i][j] += mat1[i][k]*mat2[k][j];
+    	  }
+      }
     }
 }
 
-void reflectx(int *pt){
+void matToPoint(int mat[][3], Point *res){
 
-	int t[3][3] = { {100, 0, 0},
+  for (int i = 0; i < nPoint; i++){
+      res[i].x = mat[i][0];
+      res[i].y = mat[i][1];
+      res[i].h = mat[i][2];
+  }
+
+}
+
+void pointToMat(Point *res, int mat[][3]){
+
+  for (int i = 0; i < nPoint; i++){
+      mat[i][0] = res[i].x;
+      mat[i][1] = res[i].y;
+      mat[i][2] = res[i].h;
+  }
+
+}
+
+void plotPoints(Point *p){
+  glBegin(GL_POLYGON);
+
+  for(int i = 0; i<nPoint; i++){
+    glVertex2i(p[i].x, p[i].y);
+  }
+
+  glEnd();
+}
+
+Point* translate(Point *p){
+
+	int t[3][3] = { {1, 0, 0},
                     {0, 1, 0},
-                    {0, 0, 1} };
-    int res[1][3];
-	transform(pt, t, res);
-	cout<<"Transformed :"<<res[0][0]<<"\t"<<res[0][1]<<endl;
-	plot(res[0][0], res[0][1]);	
-	
+                    {0, 400, 1} };
+
+  int matPoint[nPoint][3];
+  pointToMat(p, matPoint);
+
+  int resPoint[nPoint][3];
+  transform(matPoint, t, resPoint);
+
+  Point *res;
+  res = new Point[nPoint];
+  matToPoint(resPoint, res);
+
+  return res;
+
 }
 
 void myDisplay() {
@@ -56,31 +95,36 @@ void myDisplay() {
   glColor3f(0.0, 0.0, 0.0);
   glPointSize(1.0);
 
-  for(int i = 0; i<100; i++){
-  	plot(pts[i][0],pts[i][1]);
-  	reflectx(pts[i]);	
-  }
+  plotPoints(pts);
+
+  Point *p;
+  p = translate(pts);
+  plotPoints(p);
 
   glFlush();
 }
 
 int main(int argc, char **argv) {
-  int x, y;
-  
-  pts = new int*[100];
-  
-  for(int i = 0; i<100; i++){
-  
-  	pts[i] = new int[3];
-  	pts[i][0] = i+1;
-  	pts[i][1] = 2;
-  	pts[i][2] = 1;
-  	
+
+  cout << "Enter Number of points : ";
+  cin >> nPoint;
+
+  pts = new Point[nPoint];
+
+  for(int i = 0; i<nPoint; i++){
+
+    cout << "Enter Point" << i + 1 << " : ";
+  	cin >> pts[i].x;
+  	cin >> pts[i].y;
+  	pts[i].h = 1;
+
+    cout << endl;
+
   }
-  
+
   glutInit(&argc, argv);
   glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
-  glutInitWindowSize(640, 480);
+  glutInitWindowSize(1000, 1000);
   glutInitWindowPosition(100, 150);
   glutCreateWindow("2d Transform");
   glutDisplayFunc(myDisplay);
