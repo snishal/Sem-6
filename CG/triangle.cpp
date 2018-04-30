@@ -45,7 +45,6 @@ void ddaAlgo(Point p1, Point p2)
         Y += Yinc;
     }
 
-
 }
 
 void myDisplay()

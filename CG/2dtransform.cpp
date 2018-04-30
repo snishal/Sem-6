@@ -27,7 +27,7 @@ void myInit(void) {
 
 void transform(int mat1[][3], int mat2[][3], int res[][3])
 {
-    int i,j, k;
+    int i,j,k;
     for(int i = 0; i < nPoint; i++){
       for (j = 0; j < 3; j++)
       {
