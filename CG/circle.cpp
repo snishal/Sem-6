@@ -1,6 +1,5 @@
-#include <GL/glut.h>
 #include <iostream>
-#include <stdio.h>
+#include <GL/glut.h>
 using namespace std;
 
 int xc, yc, r;
@@ -22,36 +21,28 @@ void myInit(void) {
 
 void circleAlgo()
 {
-    int x = r, y = 0;
+    int x = 0, y = r;
 
-    int P = 1 - r;
-    while (x > y)
+    int D = 1 - r;
+    while (y > x)
     {
-        y++;
-        if (P <= 0)
-            P = P + 2*y + 1;
-        else
-        {
-            x--;
-            P = P + 2*y - 2*x + 1;
-        }
-
-        if (x < y)
-            break;
-
         plot(x, y);
         plot(-x, y);
         plot(x, -y);
         plot(-x, -y);
+        plot(y, x);
+        plot(-y, x);
+        plot(y, -x);
+        plot(-y, -x);
 
-        if (x != y)
+        if (D < 0)
+            D = D + 2*x + 3;
+        else
         {
-            plot(y, x);
-            plot(-y, x);
-            plot(y, -x);
-            plot(-y, -x);
+            D = D + 2*x - 2*y + 5;
+            y--;
         }
-
+        x++;
     }
 }
 
@@ -66,7 +57,7 @@ void myDisplay(void) {
 }
 
 int main(int argc, char **argv) {
-  cout << "Enter the coordinates of the Line:\n\n" << endl;
+  cout << "Enter the coordinates of the center and radius of the circle:\n\n" << endl;
 
   cout << "X-Center coordinate   : ";
   cin >> xc;
@@ -79,7 +70,7 @@ int main(int argc, char **argv) {
   glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
   glutInitWindowSize(640, 480);
   glutInitWindowPosition(100, 150);
-  glutCreateWindow("DDA Alogrithm");
+  glutCreateWindow("Circle Alogrithm");
   glutDisplayFunc(myDisplay);
   myInit();
   glutMainLoop();
