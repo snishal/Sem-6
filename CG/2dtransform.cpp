@@ -9,12 +9,6 @@ struct Point{
   int h;
 }*pts;
 
-void plot(int x, int y) {
-  glBegin(GL_POINTS);
-  glVertex2i(x, y);
-  glEnd();
-}
-
 void myInit(void) {
   glClearColor(1.0, 1.0, 1.0, 0.0);
   glColor3f(0.0f, 0.0f, 0.0f);
@@ -72,9 +66,11 @@ void plotPoints(Point *p){
 
 Point* translate(Point *p){
 
-	int t[3][3] = { {1, 0, 0},
-                    {0, 1, 0},
-                    {0, 400, 1} };
+	int t[3][3] = {
+                  {1, 0, 0},
+                  {0, 1, 0},
+                  {0, 400, 1}
+                };
 
   int matPoint[nPoint][3];
   pointToMat(p, matPoint);
