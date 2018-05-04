@@ -1,6 +1,5 @@
 #include <GL/glut.h>
 #include <iostream>
-#include <stdio.h>
 using namespace std;
 
 int x1, y1, x2, y2;

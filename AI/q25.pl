@@ -34,5 +34,6 @@ catTest('N', 'house').
 catTest('N', 'stream').
 catTest('V', 'shades').
 catTest('PREP', 'by').
+catTest('AUX', 'has').
 
 sentence(X) :- arc(X, 'S1', []), !.
